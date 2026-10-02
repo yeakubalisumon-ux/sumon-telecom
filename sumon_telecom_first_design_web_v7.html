@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0759c9">
+<title>SUMON TELECOM — হিসাব ও ব্যবস্থাপনা</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:"Noto Sans Bengali","Hind Siliguri",Arial,sans-serif;background:#f3f7fc;color:#172033}
+button,input,select{font:inherit}button{cursor:pointer;border:0}
+.app{min-height:100vh;max-width:480px;margin:auto;background:#f5f8fd;box-shadow:0 0 35px #0002}
+.top{height:72px;background:linear-gradient(135deg,#0755bd,#1479e9);color:#fff;display:flex;align-items:center;padding:10px 14px;gap:12px;position:sticky;top:0;z-index:20}
+.menu{width:40px;height:40px;border-radius:50%;background:#ffffff22;color:#fff;font-size:25px}
+.logo{width:43px;height:43px;border-radius:50%;background:#fff;color:#0759c9;display:grid;place-items:center;font-weight:900;font-size:20px;border:2px solid #ffd84d}
+.brand{flex:1}.brand b{font-size:17px;letter-spacing:.4px}.brand small{display:block;font-size:10px;opacity:.9}
+.bell{width:38px;height:38px;background:#ffffff18;border-radius:50%;font-size:20px;position:relative}.dot{position:absolute;width:8px;height:8px;background:#ff4c67;border-radius:50%;right:7px;top:6px;border:1px solid #fff}
+main{padding:12px 12px 82px}.profile{background:#fff;border-radius:12px;padding:11px 13px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 8px #164c8a12;margin-bottom:10px}.avatar{width:42px;height:42px;border-radius:50%;background:#e9f2ff;display:grid;place-items:center;font-size:23px}.profile b{font-size:13px}.profile small{font-size:10px;color:#68748a}
+.banner{height:82px;border-radius:12px;overflow:hidden;background:linear-gradient(110deg,#053e9a,#0c72dd 55%,#153eb4);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:12px 15px;margin-bottom:11px;box-shadow:0 3px 9px #0759c92b}.banner h3{margin:0;font-size:16px}.banner p{margin:3px 0 0;font-size:11px}.phone{font-size:45px;transform:rotate(-10deg);opacity:.95}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.card{border-radius:10px;color:#fff;padding:12px 12px;min-height:72px;box-shadow:0 3px 7px #0001}.card .ico{font-size:21px}.card small{display:block;font-size:10px;margin-top:4px;opacity:.95}.card strong{font-size:17px}.green{background:linear-gradient(135deg,#11b875,#0b9d65)}.blue{background:linear-gradient(135deg,#2478ed,#1760d0)}.orange{background:linear-gradient(135deg,#ffad2f,#f07b16)}.purple{background:linear-gradient(135deg,#8747df,#6830c9)}
+.section{background:#fff;border-radius:12px;margin-top:12px;padding:10px 11px;box-shadow:0 2px 8px #164c8a12}.section-title{font-weight:800;font-size:13px;margin-bottom:7px;display:flex;justify-content:space-between}.section-title span{color:#1667d8;font-size:11px}
+.sale{display:flex;align-items:center;padding:9px 3px;border-top:1px solid #edf1f6}.sale:first-of-type{border-top:0}.prodico{width:35px;height:35px;border-radius:9px;background:#eef5ff;display:grid;place-items:center;font-size:19px;margin-right:9px}.sale .info{flex:1}.sale b{font-size:11px}.sale small{display:block;color:#667085;font-size:9px}.sale .price{text-align:right;font-size:11px;font-weight:800;color:#1266d7}.sale .time{font-size:8px;color:#8993a3;font-weight:400}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);height:67px;background:#fff;border-top:1px solid #e3e8ef;display:grid;grid-template-columns:repeat(5,1fr);z-index:30;box-shadow:0 -4px 16px #0b4b9810}.nav{background:none;color:#7b8797;font-size:10px;padding-top:7px}.nav .nicon{display:block;font-size:21px;line-height:25px}.nav.active{color:#0c68da;font-weight:800}.nav.active .nicon{background:#e7f1ff;width:38px;margin:auto;border-radius:10px}
+.drawerShade{display:none;position:fixed;inset:0;background:#0007;z-index:40}.drawer{width:305px;max-width:82%;height:100%;background:#fff;position:absolute;left:0;top:0;box-shadow:5px 0 20px #0003}.drawerHead{height:105px;background:linear-gradient(135deg,#0754bd,#217be9);color:#fff;padding:16px}.drawerHead b{font-size:17px}.drawerHead small{display:block;margin-top:3px}.menuItem{padding:13px 18px;border-bottom:1px solid #eef1f5;font-size:13px;display:flex;align-items:center;gap:13px}.menuItem i{font-style:normal;width:24px;text-align:center;font-size:19px}.menuItem:hover{background:#eef6ff;color:#0867d8}
+.page{display:none}.page.active{display:block}
+.form{background:#fff;padding:12px;border-radius:12px;box-shadow:0 2px 8px #164c8a12}.form label{font-size:11px;font-weight:700;display:block;margin:9px 0 5px}.form input,.form select{width:100%;height:43px;border:1px solid #dce4ef;border-radius:9px;padding:0 11px;outline:none}.form input:focus,.form select:focus{border-color:#1672e5;box-shadow:0 0 0 3px #1672e515}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.primary{width:100%;height:45px;margin-top:13px;background:#0968db;color:#fff;border-radius:9px;font-weight:800}.pill{display:inline-block;padding:4px 8px;border-radius:15px;background:#e7f7ef;color:#0a9a61;font-size:9px;font-weight:800}
+.table{width:100%;border-collapse:collapse;font-size:10px}.table th,.table td{padding:9px 4px;border-bottom:1px solid #edf1f6;text-align:left}.table th{color:#657187}.empty{text-align:center;padding:25px;color:#8792a4;font-size:12px}
+.toast{position:fixed;left:50%;bottom:82px;transform:translateX(-50%) translateY(20px);background:#172033;color:#fff;padding:10px 16px;border-radius:22px;font-size:11px;opacity:0;pointer-events:none;transition:.25s;z-index:60}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(min-width:481px){body{background:linear-gradient(135deg,#e7f0fb,#cbdcf3);padding:15px}.app{border-radius:20px;overflow:hidden}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+<button class="menu" onclick="openDrawer()">☰</button>
+<div class="logo">ST</div>
+<div class="brand"><b>SUMON TELECOM</b><small>হিসাব ও ব্যবস্থাপনা</small></div>
+<button class="bell" onclick="toast('কোনো নতুন নোটিফিকেশন নেই')">🔔<span class="dot"></span></button>
+</header>
+
+<main>
+<section id="home" class="page active">
+<div class="profile"><div class="avatar">👨🏻</div><div><b>আসসালামু আলাইকুম,<br>মোঃ ইয়াকুব আলী সুমন</b><small>আজ: <span id="today"></span></small></div></div>
+<div class="banner"><div><h3>ব্যবসার সাথে, সবসময়</h3><p>সহজ হিসাব • দ্রুত বিক্রি • স্টক নিয়ন্ত্রণ</p></div><div class="phone">📱</div></div>
+<div class="grid">
+<div class="card green"><span class="ico">🛒</span><small>আজকের বিক্রি</small><strong id="todaySales">৳ 0</strong></div>
+<div class="card blue"><span class="ico">📈</span><small>আজকের লাভ</small><strong id="todayProfit">৳ 0</strong></div>
+<div class="card orange"><span class="ico">👥</span><small>মোট বাকি</small><strong id="totalDue">৳ 0</strong></div>
+<div class="card purple"><span class="ico">📦</span><small>মোট স্টক</small><strong id="stockCount">0 পণ্য</strong></div>
+</div>
+<div class="section"><div class="section-title">সাম্প্রতিক বিক্রি <span onclick="showPage('sales')">সব দেখুন →</span></div><div id="recentSales"></div></div>
+</section>
+
+<section id="sales" class="page">
+<div class="section-title" style="margin:4px 2px 9px;font-size:17px">বিক্রয় এন্ট্রি</div>
+<div class="form">
+<label>পণ্য নির্বাচন <span style="font-weight:400;color:#7a8798">— তালিকায় থাকলে নির্বাচন করুন</span></label>
+<select id="saleProduct"><option value="">-- পণ্য নির্বাচন করুন --</option></select>
+<label>পণ্যের নাম (ম্যানুয়াল)</label>
+<input id="saleManualName" type="text" placeholder="তালিকায় না থাকলে পণ্যের নাম লিখুন">
+<div class="row">
+<div><label>পরিমাণ</label><input id="saleQty" type="number" min="1" value="1"></div>
+<div><label>ক্রয় মূল্য (৳)</label><input id="saleCost" type="number" min="0" placeholder="ক্রয় মূল্য"></div>
+</div>
+<div class="row">
+<div><label>বিক্রয় মূল্য (৳)</label><input id="salePrice" type="number" min="0" placeholder="বিক্রয় মূল্য"></div>
+<div><label>মোট মূল্য (৳)</label><input id="saleTotal" type="number" value="0" readonly style="background:#f1f5fa;font-weight:800"></div>
+</div>
+<div class="row"><div><label>পেমেন্ট</label><select id="salePay"><option>ক্যাশ</option><option>bKash</option><option>Nagad</option><option>ব্যাংক</option><option>বাকি</option></select></div><div><label>ক্রেতার নাম</label><input id="saleCustomer" placeholder="ঐচ্ছিক"></div></div>
+<div id="saleProfitPreview" style="margin-top:10px;padding:9px;border-radius:9px;background:#eef8f3;color:#078b58;font-size:12px;font-weight:800">প্রতি পণ্যে লাভ: ৳ 0 • মোট লাভ: ৳ 0</div><input id="saleEditId" type="hidden" value=""><button class="primary" id="saleSaveBtn" onclick="saveSaleEntry()">💾 বিক্রি সংরক্ষণ</button><button class="primary" id="saleCancelBtn" onclick="cancelEditSale()" style="display:none;background:#6b7280">✕ এডিট বাতিল</button>
+</div>
+<div class="section"><div class="section-title">আজকের বিক্রয় তালিকা</div><div id="salesList"></div></div>
+</section>
+
+<section id="purchase" class="page">
+<div class="section-title" style="margin:4px 2px 9px;font-size:17px">ক্রয় এন্ট্রি</div>
+<div class="form">
+<label>পণ্য</label><select id="purchaseProduct"></select>
+<div class="row"><div><label>পরিমাণ</label><input id="purchaseQty" type="number" min="1" value="1"></div><div><label>ক্রয় মূল্য (৳)</label><input id="purchaseCost" type="number" min="0" placeholder="ক্রয় মূল্য লিখুন"></div></div>
+<button class="primary" onclick="addPurchase()">💾 ক্রয় সংরক্ষণ</button>
+</div>
+</section>
+
+<section id="stock" class="page">
+<div class="section-title" style="margin:4px 2px 9px;font-size:17px">পণ্য / স্টক</div>
+<div class="form">
+<div class="row"><div><label>পণ্যের নাম</label><input id="newName" placeholder="যেমন: USB Cable"></div><div><label>স্টক</label><input id="newStock" type="number" value="0"></div></div>
+<div class="row">
+<div>
+<label>ক্রয় মূল্য (৳)</label>
+<input id="newCost" type="number" min="0" value="0" placeholder="যেমন ১৫">
+</div>
+<div>
+<label>বিক্রয় মূল্য (৳)</label>
+<input id="newPrice" type="number" min="0" value="0" placeholder="যেমন ২০">
+</div>
+</div>
+<label>লাভ (৳) — অটো হিসাব</label>
+<input id="newProfit" type="number" value="0" readonly style="background:#eef8f3;color:#078b58;font-weight:800">
+<div style="margin-top:7px;padding:8px 10px;border-radius:8px;background:#f1f6fc;font-size:11px;color:#1670d7;font-weight:700">
+ক্রয় মূল্য → বিক্রয় মূল্য → লাভ (অটো)
+</div>
+<button class="primary" onclick="addProduct()">＋ নতুন পণ্য যোগ করুন</button>
+</div>
+<div class="section"><table class="table"><thead><tr><th>পণ্য</th><th>স্টক</th><th>ক্রয় মূল্য</th><th>বিক্রয় মূল্য</th><th>লাভ</th></tr></thead><tbody id="stockList"></tbody></table></div>
+</section>
+
+<section id="due" class="page">
+<div class="section-title" style="margin:4px 2px 9px;font-size:17px">বাকি (কাস্টমার)</div>
+<div class="section"><div class="card orange"><small>মোট বাকি</small><strong id="duePageTotal">৳ 0</strong></div></div>
+<div class="section"><div id="dueList"></div></div>
+</section>
+
+<section id="reports" class="page">
+<div class="section-title" style="margin:4px 2px 9px;font-size:17px">রিপোর্ট</div>
+<div class="grid">
+<div class="card green"><small>মোট বিক্রি</small><strong id="rSales">৳ 0</strong></div>
+<div class="card blue"><small>মোট লাভ</small><strong id="rProfit">৳ 0</strong></div>
+<div class="card orange"><small>মোট বাকি</small><strong id="rDue">৳ 0</strong></div>
+<div class="card purple"><small>মোট পণ্য</small><strong id="rProducts">0</strong></div>
+</div>
+<div class="section"><div class="section-title">পেমেন্ট সারাংশ</div><div id="paymentSummary"></div></div>
+</section>
+
+<section id="settings" class="page">
+<div class="section-title" style="margin:4px 2px 9px;font-size:17px">সেটিংস</div>
+<div class="section">
+<div class="menuItem" onclick="backup()">💾 ব্যাকআপ ডাউনলোড</div>
+<div class="menuItem" onclick="document.getElementById('restoreFile').click()">📥 ব্যাকআপ রিস্টোর</div>
+<div class="menuItem" onclick="exportCSV()">📊 CSV এক্সপোর্ট</div>
+<div class="menuItem" onclick="clearData()">🗑️ সব ডাটা মুছে ফেলুন</div>
+<input id="restoreFile" type="file" accept=".json" style="display:none" onchange="restore(event)">
+</div>
+<div class="section" style="text-align:center"><b>SUMON TELECOM</b><br><small>হিসাব ও ব্যবস্থাপনা • Version 1.0</small></div>
+</section>
+</main>
+
+<nav class="bottom">
+<button class="nav active" data-page="home" onclick="showPage('home')"><span class="nicon">⌂</span>হোম</button>
+<button class="nav" data-page="sales" onclick="showPage('sales')"><span class="nicon">♟</span>বিক্রি</button>
+<button class="nav" data-page="purchase" onclick="showPage('purchase')"><span class="nicon">🛒</span>ক্রয়</button>
+<button class="nav" data-page="stock" onclick="showPage('stock')"><span class="nicon">▣</span>স্টক</button>
+<button class="nav" data-page="settings" onclick="showPage('settings')"><span class="nicon">•••</span>আরও</button>
+</nav>
+</div>
+
+<div class="drawerShade" id="shade" onclick="closeDrawer()"><aside class="drawer" onclick="event.stopPropagation()">
+<div class="drawerHead"><b>SUMON TELECOM</b><small>হিসাব ও ব্যবস্থাপনা</small></div>
+<div class="menuItem" onclick="showPage('home');closeDrawer()">🏠 হোম</div>
+<div class="menuItem" onclick="showPage('sales');closeDrawer()">🛒 বিক্রয় এন্ট্রি</div>
+<div class="menuItem" onclick="showPage('purchase');closeDrawer()">🧾 ক্রয় এন্ট্রি</div>
+<div class="menuItem" onclick="showPage('stock');closeDrawer()">📦 পণ্য / স্টক</div>
+<div class="menuItem" onclick="showPage('due');closeDrawer()">👥 বাকি (কাস্টমার)</div>
+<div class="menuItem" onclick="showPage('reports');closeDrawer()">📊 রিপোর্ট</div>
+<div class="menuItem" onclick="showPage('settings');closeDrawer()">⚙️ সেটিংস</div>
+</aside></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY='sumon_telecom_design_v1';
+let db=JSON.parse(localStorage.getItem(KEY)||'null')||{
+ products:[
+  {id:1,name:'USB Cable',stock:20,cost:25,price:150,icon:'🔌'},
+  {id:2,name:'Charger 3.0',stock:15,cost:180,price:650,icon:'🔋'},
+  {id:3,name:'Earphone',stock:18,cost:32,price:350,icon:'🎧'},
+  {id:4,name:'LED Bulb 9W',stock:30,cost:40,price:450,icon:'💡'},
+  {id:5,name:'Power Bank 10000mAh',stock:8,cost:800,price:1250,icon:'🔋'},
+  {id:6,name:'Mobile Cover',stock:25,cost:50,price:120,icon:'📱'}
+ ],
+ sales:[], purchases:[], dues:[]
+};
+function save(){localStorage.setItem(KEY,JSON.stringify(db))}
+function money(n){return '৳ '+Number(n||0).toLocaleString('en-US')}
+function dateStr(){return new Date().toISOString().slice(0,10)}
+function timeStr(){return new Date().toLocaleTimeString('bn-BD',{hour:'2-digit',minute:'2-digit'})}
+function toast(s){let t=document.getElementById('toast');t.textContent=s;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+function openDrawer(){document.getElementById('shade').style.display='block'}
+function closeDrawer(){document.getElementById('shade').style.display='none'}
+function showPage(id){
+ document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');
+ document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.page===id));
+ if(id==='home') renderHome(); if(id==='sales') renderSales(); if(id==='stock') renderStock(); if(id==='due') renderDue(); if(id==='reports') renderReports(); renderSelects();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function renderSelects(){
+ let opts='<option value="">-- পণ্য নির্বাচন করুন --</option>'+db.products.map(p=>`<option value="${p.id}">${p.name} — ${money(p.price)}</option>`).join('');
+ document.getElementById('saleProduct').innerHTML=opts;
+ document.getElementById('purchaseProduct').innerHTML=opts;
+ let editId=document.getElementById('saleEditId')?.value;
+ let manual=document.getElementById('saleManualName')?.value.trim();
+ let p=db.products[0];
+ if(p && !editId && !manual){
+   document.getElementById('saleCost').value=p.cost;
+   document.getElementById('salePrice').value=p.price;
+   document.getElementById('purchaseCost').value=p.cost;
+ }
+}
+function updateSaleProfit(){
+ let qty=+document.getElementById('saleQty').value||0;
+ let cost=+document.getElementById('saleCost').value||0;
+ let price=+document.getElementById('salePrice').value||0;
+ let per=price-cost;
+ document.getElementById('saleTotal').value=price*qty;
+ document.getElementById('saleProfitPreview').textContent=`প্রতি পণ্যে লাভ: ${money(per)} • মোট লাভ: ${money(per*qty)}`;
+}
+document.getElementById('saleProduct').onchange=e=>{
+ let x=db.products.find(p=>p.id==e.target.value);
+ if(x){
+   document.getElementById('saleManualName').value='';
+   document.getElementById('saleCost').value=x.cost;
+   document.getElementById('salePrice').value=x.price;
+ }
+ updateSaleProfit();
+};
+document.getElementById('saleManualName').oninput=()=>{
+ if(document.getElementById('saleManualName').value.trim())document.getElementById('saleProduct').value='';
+ updateSaleProfit();
+};
+document.getElementById('saleQty').oninput=updateSaleProfit;
+document.getElementById('saleCost').oninput=updateSaleProfit;
+document.getElementById('salePrice').oninput=updateSaleProfit;
+
+function renderHome(){
+ let today=dateStr(), ss=db.sales.filter(s=>s.date===today);
+ let sales=ss.reduce((a,s)=>a+s.total,0), profit=ss.reduce((a,s)=>a+s.profit,0);
+ let due=db.dues.reduce((a,d)=>a+d.amount,0), stock=db.products.reduce((a,p)=>a+p.stock,0);
+ document.getElementById('today').textContent=new Date().toLocaleDateString('bn-BD');
+ document.getElementById('todaySales').textContent=money(sales);document.getElementById('todayProfit').textContent=money(profit);
+ document.getElementById('totalDue').textContent=money(due);document.getElementById('stockCount').textContent=stock+' পণ্য';
+ let arr=[...db.sales].reverse().slice(0,5);
+ document.getElementById('recentSales').innerHTML=arr.length?arr.map(s=>`<div class="sale"><div class="prodico">${s.icon||'🛍️'}</div><div class="info"><b>${s.name}</b><small>${s.qty} × ${money(s.price)}</small></div><div class="price">${money(s.total)}<div class="time">${s.time}</div></div><button onclick="editSale(${s.id})" style="margin-left:6px;background:#e8f2ff;color:#0867d8;border-radius:8px;padding:6px 7px;font-size:10px">✎</button></div>`).join(''):'<div class="empty">এখনো কোনো বিক্রি নেই</div>';
+}
+function getSaleForm(){
+ let pId=document.getElementById('saleProduct').value;
+ let p=pId?db.products.find(x=>x.id==pId):null;
+ let manual=document.getElementById('saleManualName').value.trim();
+ return {
+   pId,p,name:manual||(p?p.name:''),
+   qty:+document.getElementById('saleQty').value,
+   cost:+document.getElementById('saleCost').value,
+   price:+document.getElementById('salePrice').value,
+   pay:document.getElementById('salePay').value,
+   customer:document.getElementById('saleCustomer').value.trim()
+ };
+}
+
+function saveSaleEntry(){
+ let editId=+document.getElementById('saleEditId').value;
+ if(editId) updateSale(editId); else addSale();
+}
+
+function addSale(){
+ let f=getSaleForm();
+ if(!f.name)return toast('পণ্য নির্বাচন করুন অথবা পণ্যের নাম লিখুন');
+ if(f.qty<1||f.cost<0||f.price<0)return toast('পরিমাণ ও মূল্য ঠিকভাবে দিন');
+ if(f.p && f.p.stock<f.qty)return toast('স্টকে পর্যাপ্ত পণ্য নেই');
+
+ let total=f.qty*f.price, profit=f.qty*(f.price-f.cost);
+ if(f.p)f.p.stock-=f.qty;
+
+ db.sales.push({
+   id:Date.now(),date:dateStr(),time:timeStr(),
+   productId:f.p?f.p.id:null,name:f.name,icon:f.p?f.p.icon:'📦',
+   qty:f.qty,price:f.price,cost:f.cost,total,profit,pay:f.pay,customer:f.customer
+ });
+ if(f.pay==='বাকি')db.dues.push({id:Date.now()+1,name:f.customer||'অজানা কাস্টমার',amount:total,date:dateStr()});
+ save();resetSaleForm();toast('বিক্রি সফলভাবে সংরক্ষণ হয়েছে');refreshAll();
+}
+
+function editSale(id){
+ let s=db.sales.find(x=>x.id===id);
+ if(!s)return;
+ document.getElementById('saleProduct').value=s.productId||'';
+ document.getElementById('saleManualName').value=s.productId?'':s.name;
+ document.getElementById('saleQty').value=s.qty;
+ document.getElementById('saleCost').value=s.cost;
+ document.getElementById('salePrice').value=s.price;
+ document.getElementById('salePay').value=s.pay;
+ document.getElementById('saleCustomer').value=s.customer||'';
+ document.getElementById('saleEditId').value=id;
+ document.getElementById('saleSaveBtn').textContent='✎ হিসাব আপডেট করুন';
+ document.getElementById('saleCancelBtn').style.display='block';
+ updateSaleProfit();
+ showPage('sales');
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateSale(id){
+ let s=db.sales.find(x=>x.id===id);
+ if(!s)return;
+ let f=getSaleForm();
+ if(!f.name)return toast('পণ্য নির্বাচন করুন অথবা পণ্যের নাম লিখুন');
+ if(f.qty<1||f.cost<0||f.price<0)return toast('পরিমাণ ও মূল্য ঠিকভাবে দিন');
+
+ let oldP=s.productId?db.products.find(x=>x.id===s.productId):null;
+ if(oldP)oldP.stock+=s.qty;
+
+ if(f.p && f.p.stock<f.qty){
+   if(oldP)oldP.stock-=s.qty;
+   return toast('এডিট করার জন্য পর্যাপ্ত স্টক নেই');
+ }
+ if(f.p)f.p.stock-=f.qty;
+
+ s.productId=f.p?f.p.id:null;
+ s.name=f.name;
+ s.icon=f.p?f.p.icon:'📦';
+ s.qty=f.qty;
+ s.cost=f.cost;
+ s.price=f.price;
+ s.total=f.qty*f.price;
+ s.profit=f.qty*(f.price-f.cost);
+ s.pay=f.pay;
+ s.customer=f.customer;
+
+ save();resetSaleForm();toast('বিক্রির হিসাব আপডেট হয়েছে');refreshAll();
+}
+
+function cancelEditSale(){
+ resetSaleForm();
+ toast('এডিট বাতিল হয়েছে');
+}
+
+function resetSaleForm(){
+ document.getElementById('saleProduct').value='';
+ document.getElementById('saleManualName').value='';
+ document.getElementById('saleQty').value=1;
+ document.getElementById('saleCost').value='';
+ document.getElementById('salePrice').value='';
+ document.getElementById('saleTotal').value=0;
+ document.getElementById('salePay').value='ক্যাশ';
+ document.getElementById('saleCustomer').value='';
+ document.getElementById('saleEditId').value='';
+ document.getElementById('saleSaveBtn').textContent='💾 বিক্রি সংরক্ষণ';
+ document.getElementById('saleCancelBtn').style.display='none';
+ updateSaleProfit();
+}
+
+function refreshAll(){
+ renderHome();renderSales();renderStock();renderDue();renderReports();renderSelects();
+}
+
+function addPurchase(){
+ let p=db.products.find(x=>x.id==document.getElementById('purchaseProduct').value), qty=+document.getElementById('purchaseQty').value,cost=+document.getElementById('purchaseCost').value;
+ if(!p||qty<1)return toast('তথ্য ঠিকভাবে দিন');p.stock+=qty;p.cost=cost;db.purchases.push({date:dateStr(),name:p.name,qty,cost,total:qty*cost});save();toast('ক্রয় সংরক্ষণ হয়েছে');renderHome();renderStock();renderReports();
+}
+function updateProductProfit(){
+ let cost=+document.getElementById('newCost').value||0;
+ let price=+document.getElementById('newPrice').value||0;
+ document.getElementById('newProfit').value=price-cost;
+}
+document.getElementById('newCost').addEventListener('input',updateProductProfit);
+document.getElementById('newPrice').addEventListener('input',updateProductProfit);
+
+function addProduct(){
+ let name=document.getElementById('newName').value.trim(),stock=+document.getElementById('newStock').value,cost=+document.getElementById('newCost').value,price=+document.getElementById('newPrice').value,profit=price-cost;
+ if(!name)return toast('পণ্যের নাম দিন');db.products.push({id:Date.now(),name,stock,cost,price,profit,icon:'📦'});save();toast('নতুন পণ্য যোগ হয়েছে');document.getElementById('newName').value='';document.getElementById('newCost').value='0';document.getElementById('newPrice').value='0';updateProductProfit();renderSelects();renderStock();renderHome();
+}
+function renderSales(){
+ let arr=[...db.sales].reverse();
+ document.getElementById('salesList').innerHTML=arr.length?arr.map(s=>`<div class="sale">
+ <div class="prodico">${s.icon||'🛍️'}</div>
+ <div class="info"><b>${s.name}</b><small>${s.date} • ${s.qty} × ${money(s.price)} • ${s.pay}</small></div>
+ <div class="price">${money(s.total)}<div class="time">লাভ ${money(s.profit)}</div></div>
+ <button onclick="editSale(${s.id})" style="margin-left:7px;background:#e8f2ff;color:#0867d8;border-radius:8px;padding:7px 8px;font-size:10px;font-weight:800">✎ এডিট</button>
+ </div>`).join(''):'<div class="empty">কোনো বিক্রি নেই</div>';
+}
+
+function renderStock(){
+ document.getElementById('stockList').innerHTML=db.products.map(p=>{
+ let profit=Number(p.profit||0);
+ return `<tr>
+ <td><b>${p.icon} ${p.name}</b></td>
+ <td>${p.stock} ${p.stock<=5?'<span class="pill">কম</span>':''}</td>
+ <td>${money(p.cost)}</td>
+ <td>${money(p.price)}</td>
+ <td style="color:${profit>=0?'#0a9a61':'#ef476f'};font-weight:800">${money(profit)}</td>
+ </tr>`;
+}).join('');
+}
+function renderDue(){
+ let total=db.dues.reduce((a,d)=>a+d.amount,0);document.getElementById('duePageTotal').textContent=money(total);
+ document.getElementById('dueList').innerHTML=db.dues.length?db.dues.map(d=>`<div class="sale"><div class="prodico">👤</div><div class="info"><b>${d.name}</b><small>${d.date}</small></div><div class="price" style="color:#ef476f">${money(d.amount)}<div class="time">বাকি</div></div></div>`).join(''):'<div class="empty">কোনো বাকি নেই</div>';
+}
+function renderReports(){
+ let sales=db.sales.reduce((a,s)=>a+s.total,0),profit=db.sales.reduce((a,s)=>a+s.profit,0),due=db.dues.reduce((a,d)=>a+d.amount,0);
+ document.getElementById('rSales').textContent=money(sales);document.getElementById('rProfit').textContent=money(profit);document.getElementById('rDue').textContent=money(due);document.getElementById('rProducts').textContent=db.products.length;
+ let map={};db.sales.forEach(s=>map[s.pay]=(map[s.pay]||0)+s.total);document.getElementById('paymentSummary').innerHTML=Object.keys(map).length?Object.entries(map).map(([k,v])=>`<div class="sale"><div class="info"><b>${k}</b></div><div class="price">${money(v)}</div></div>`).join(''):'<div class="empty">কোনো তথ্য নেই</div>';
+}
+function backup(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:'application/json'}));a.download='sumon-telecom-backup.json';a.click();toast('ব্যাকআপ ডাউনলোড হয়েছে')}
+function restore(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{db=JSON.parse(r.result);save();renderHome();renderSelects();toast('ব্যাকআপ রিস্টোর হয়েছে')}catch{toast('ব্যাকআপ ফাইল সঠিক নয়')}};r.readAsText(f)}
+function exportCSV(){let rows=[['তারিখ','সময়','পণ্য','পরিমাণ','বিক্রয় মূল্য','মোট','লাভ','পেমেন্ট']];db.sales.forEach(s=>rows.push([s.date,s.time,s.name,s.qty,s.price,s.total,s.profit,s.pay]));let csv=rows.map(r=>r.join(',')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='sumon-telecom-sales.csv';a.click();toast('CSV ডাউনলোড হয়েছে')}
+function clearData(){if(confirm('সব ডাটা মুছে ফেলবেন?')){localStorage.removeItem(KEY);location.reload()}}
+renderSelects();updateSaleProfit();updateProductProfit();renderHome();renderSales();
+</script>
+</body>
+</html>
